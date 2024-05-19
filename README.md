@@ -1,24 +1,10 @@
-# local-edit
-
-## Project setup
-```
+# install
+```shell
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+# run
+```shell
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+> must run in `https` or `localhost` or `127.0.0.1`
