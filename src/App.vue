@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <LocalEdit></LocalEdit>
+    <LocalEdit ignore="node_modules|public"></LocalEdit>
   </div>
 </template>
 

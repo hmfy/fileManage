@@ -2,15 +2,22 @@
 
 import TreeFolder from "./TreeFolder.vue";
 import ElButton from "element-ui/packages/button";
-import {ref} from "vue";
+import {ref, defineProps} from "vue";
 import {getFilesRecursively, readFile, writeFile} from "./tools";
 import {MessageBox} from "element-ui";
+const props = defineProps({
+  ignore: {
+    type: String,
+    default: ''
+  }
+})
 const folderList = ref([])
 const openDirectory = async () => {
     if (!window.showDirectoryPicker) return
     const directoryHandle = await window.showDirectoryPicker();
     const root = []
-    await getFilesRecursively(directoryHandle, root)
+    const filterPath = new RegExp(props.ignore)
+    await getFilesRecursively(directoryHandle, root, filterPath)
     folderList.value = root
 }
 const fileOperateLoading = ref(false)

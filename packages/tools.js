@@ -1,6 +1,7 @@
-export async function getFilesRecursively(entry, children) {
+export async function getFilesRecursively(entry, children, ignoreReg) {
     if (entry.kind === "file") {
         const file = await entry.getFile();
+        if (ignoreReg.test(entry.name)) return
         if (file !== null) {
             children.push({
                 handle: entry,
@@ -11,6 +12,7 @@ export async function getFilesRecursively(entry, children) {
             return entry
         }
     } else if (entry.kind === "directory") {
+        if (ignoreReg.test(entry.name)) return
         const curChildren = []
         children.push({
             handle: entry,
@@ -23,7 +25,7 @@ export async function getFilesRecursively(entry, children) {
             ]
         })
         for await (const handle of entry.values()) {
-            await getFilesRecursively(handle, curChildren);
+            await getFilesRecursively(handle, curChildren, ignoreReg);
         }
     }
 }
